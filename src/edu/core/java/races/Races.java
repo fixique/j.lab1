@@ -10,7 +10,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.text.ParseException;
 import java.util.Scanner;
@@ -19,7 +18,6 @@ import java.util.Scanner;
  * Created by Ubeto on 21.05.17.
  */
 public class Races {
-    private static Scanner scanner;
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     private static IncrementId ownerId = new IncrementId();
@@ -146,10 +144,6 @@ public class Races {
                 logger.warn("Incorrect choice");
                 break;
         }
-    }
-
-    private static void updateEntityById() throws IOException, ParseException, NumberFormatException {
-        logger.info("Start update entity by id");
     }
 
     private static void deleteEntityById() throws IOException, ParseException, NumberFormatException {
