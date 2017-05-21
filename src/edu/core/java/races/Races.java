@@ -37,12 +37,11 @@ public class Races {
 
         while (true) {
             System.out.println("______________________________________");
-            System.out.println("1. Add entity");
-            System.out.println("2. Update entity");
-            System.out.println("3. Delete entity");
-            System.out.println("4. Show entity by id");
-            System.out.println("5. Show all entities");
-            System.out.println("6. Exit app");
+            System.out.println("1. Add or Update entity");
+            System.out.println("2. Delete entity");
+            System.out.println("3. Show entity by id");
+            System.out.println("4. Show all entities");
+            System.out.println("5. Exit app");
             System.out.println("--------------------------------------");
             int choice;
 
@@ -54,22 +53,15 @@ public class Races {
                         addEntity();
                         break;
                     case 2:
-                        //updateEntity();
-                        logger.info("Update Entity");
+                        deleteEntityById();
                         break;
                     case 3:
-                        //deleteEntity();
-                        logger.info("Delete Entity");
+                        showEntityById();
                         break;
                     case 4:
-                        //showEntity();
-                        logger.info("Show entity by id");
+                        showAllEntities();
                         break;
                     case 5:
-                        showAllEntities();
-                        logger.info("Show all entities");
-                        break;
-                    case 6:
                         logger.info("Application has stopped");
                         return;
                     default:
@@ -156,7 +148,67 @@ public class Races {
         }
     }
 
+    private static void updateEntityById() throws IOException, ParseException, NumberFormatException {
+        logger.info("Start update entity by id");
+    }
+
+    private static void deleteEntityById() throws IOException, ParseException, NumberFormatException {
+        logger.info("Start delete entity by id");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Choose type of entity: ");
+        System.out.println("______________________________________");
+        System.out.println("1. Horse Owner");
+        System.out.println("2. Horse");
+        System.out.println("3. Jockey");
+        System.out.println("4. Hippodrome");
+        System.out.println("5. Race Results");
+        System.out.println("6. Race");
+        System.out.println("7. Back");
+        System.out.println("______________________________________");
+        int choice = Integer.parseInt(reader.readLine());
+
+        Repository repository = getRepository(choice);
+
+        if (repository != null) {
+            System.out.println("Type entity id: ");
+            Long id = Long.parseLong(reader.readLine());
+            if (repository.contain(id)) {
+                repository.deleteValueObject(id);
+            } else {
+                logger.error("Can't fine entity with id: " + id);
+            }
+        } else {
+            logger.error("Incorrect choice");
+        }
+    }
+
+    private static void showEntityById() throws IOException, ParseException, NumberFormatException {
+        logger.info("Start show entity by id");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Choose type of entity: ");
+        System.out.println("______________________________________");
+        System.out.println("1. Horse Owner");
+        System.out.println("2. Horse");
+        System.out.println("3. Jockey");
+        System.out.println("4. Hippodrome");
+        System.out.println("5. Race Results");
+        System.out.println("6. Race");
+        System.out.println("7. Back");
+        System.out.println("______________________________________");
+        int choice = Integer.parseInt(reader.readLine());
+        System.out.println("Type entity id: ");
+        Long id = Long.parseLong(reader.readLine());
+        Loader loader = getLoader(choice);
+
+        if (loader != null) {
+            System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(loader.getEntityById(id)));
+        } else {
+            logger.error("Can't finde entity with id: " + id);
+        }
+    }
+
     private static void showAllEntities() throws IOException, ParseException, NumberFormatException {
+        logger.info("Start show entity");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Choose type of entity: ");
         System.out.println("______________________________________");
