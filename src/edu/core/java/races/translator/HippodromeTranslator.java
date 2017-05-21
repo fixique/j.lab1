@@ -30,7 +30,7 @@ public class HippodromeTranslator implements Translator<HippodromeVO, Hippodrome
         Hippodrome hippodrome = null;
 
         if (hippodromeVO != null) {
-            hippodrome = new Hippodrome(hippodrome.getId() ,hippodrome.getName(),hippodrome.getAddress());
+            hippodrome = new Hippodrome(hippodromeVO.getId() ,hippodromeVO.getName(),hippodromeVO.getAddress());
             logger.info("Object was converted from Value to Domain");
         } else {
             logger.error("Object == nul, object wasn't converted");

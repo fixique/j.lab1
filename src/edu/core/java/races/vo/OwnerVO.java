@@ -18,6 +18,9 @@ public class OwnerVO extends ValueObject {
         this.address = address;
     }
 
+    public OwnerVO() {}
+
     public String getFullName() { return fullName; }
     public String getAddress() { return address; }
+
 }

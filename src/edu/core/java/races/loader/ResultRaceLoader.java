@@ -35,8 +35,8 @@ public class ResultRaceLoader extends Loader {
 
         if (resultRaceVO != null) {
             resultRace = translator.fromValueToDomain(resultRaceVO);
-            resultRace.setJockey(jockeyLoader.getEntityById(resultRaceVO.getJockey()));
-            resultRace.setHorse(horseLoader.getEntityById(resultRaceVO.getHorse()));
+            resultRace.setJockey(jockeyLoader.getEntityById(resultRaceVO.getJockeyId()));
+            resultRace.setHorse(horseLoader.getEntityById(resultRaceVO.getHorseId()));
             logger.info("Domain object was successfully loaded");
         } else {
             logger.error("Domain object wasn't loaded");

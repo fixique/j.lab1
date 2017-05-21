@@ -27,6 +27,8 @@ public class HorseVO extends ValueObject{
         this.gender = gender;
     }
 
+    public HorseVO() {}
+
     public Long getOwnerId() { return ownerId; }
     public String getNickname() { return nickname; }
     public Gender getGender() { return gender; }

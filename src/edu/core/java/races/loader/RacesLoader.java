@@ -28,7 +28,7 @@ public class RacesLoader extends Loader {
                        HippodromeLoader hippodromeLoader,
                        ResultRaceLoader resultRaceLoader) {
         this.repository = racesRepository;
-        this.translator = translator;
+        this.translator = racesTranslator;
         this.hippodromeLoader = hippodromeLoader;
         this.resultRaceLoader = resultRaceLoader;
     }

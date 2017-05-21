@@ -22,6 +22,8 @@ public class JockeyVO extends ValueObject {
         this.rating = rating;
     }
 
+    public JockeyVO() {}
+
     public String getFullName() { return fullName; }
     public Integer getAge() { return age; }
     public double getRating() { return rating; }

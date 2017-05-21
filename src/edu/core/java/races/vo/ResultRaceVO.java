@@ -12,7 +12,7 @@ public class ResultRaceVO extends ValueObject{
     private Integer place;
     private Time time;
 
-    public ResultRaceVO(Long id, Long jockeyId, Long horseId, Integer place, Time time) {
+    public ResultRaceVO(Integer place, Time time, Long id, Long horseId, Long jockeyId) {
         super.id = id;
         this.jockeyId = jockeyId;
         this.horseId = horseId;
@@ -20,15 +20,17 @@ public class ResultRaceVO extends ValueObject{
         this.time = time;
     }
 
-    public ResultRaceVO(Long jockeyId, Long horseId, Integer place, Time time) {
+    public ResultRaceVO(Integer place, Time time, Long jockeyId, Long horseId) {
         this.jockeyId = jockeyId;
         this.horseId = horseId;
         this.place = place;
         this.time = time;
     }
 
-    public Long getJockey() { return jockeyId; }
-    public Long getHorse() { return horseId; }
+    public ResultRaceVO() {}
+
+    public Long getJockeyId() { return jockeyId; }
+    public Long getHorseId() { return horseId; }
     public Integer getPlace() { return place; }
     public Time getTime() { return time; }
 }

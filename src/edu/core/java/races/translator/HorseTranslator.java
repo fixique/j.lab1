@@ -31,7 +31,7 @@ public class HorseTranslator implements Translator<HorseVO, Horse> {
         Horse horse = null;
 
         if (horseVO != null) {
-            horse = new Horse(horseVO.getId(), horse.getNickname(), horse.getGender(), horse.getAge());
+            horse = new Horse(horseVO.getId(), horseVO.getNickname(), horseVO.getGender(), horseVO.getAge());
             logger.info("Object was converted from Value to Domain");
         } else {
             logger.error("Object == nul, object wasn't converted");

@@ -24,6 +24,8 @@ public class RacesVO extends ValueObject {
         this.raceResults = raceResults;
     }
 
+    public RacesVO() {}
+
     public Date getRaceData() { return raceData; }
     public Long getHippodromeId() { return hippodromeId; }
     public Long[] getRaceResults() { return raceResults; }
