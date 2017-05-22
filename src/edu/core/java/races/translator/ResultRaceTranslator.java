@@ -17,7 +17,7 @@ public class ResultRaceTranslator implements Translator<ResultRaceVO, ResultRace
         ResultRaceVO valueObject = null;
 
         if (resultRace != null) {
-            valueObject = new ResultRaceVO(resultRace.getPlace(), resultRace.getTime(), resultRace.getHorse().getId(), resultRace.getJockey().getId());
+            valueObject = new ResultRaceVO(resultRace.getPlace(), resultRace.getTime(), resultRace.getJockey().getId(), resultRace.getHorse().getId(), resultRace.getCompetition().getId());
             logger.info("Object was converted from Domain to Value");
         } else {
             logger.error("Object == null, object wasn't converted");

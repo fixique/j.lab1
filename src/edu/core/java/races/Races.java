@@ -3,7 +3,6 @@ package edu.core.java.races;
 import edu.core.java.races.additional.DataService;
 import edu.core.java.races.additional.IncrementId;
 import edu.core.java.races.loader.*;
-import edu.core.java.races.domain.*;
 import edu.core.java.races.repository.*;
 import edu.core.java.races.vo.*;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -11,26 +10,29 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.Scanner;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by Ubeto on 21.05.17.
  */
 public class Races {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
+    private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     private static IncrementId ownerId = new IncrementId();
     private static IncrementId horseId = new IncrementId();
     private static IncrementId jockeyId = new IncrementId();
     private static IncrementId hippodromeId = new IncrementId();
     private static IncrementId resultRaceId = new IncrementId();
-    private static IncrementId raceId = new IncrementId();
+    private static IncrementId competitionId = new IncrementId();
 
     private static ObjectMapper mapper = new ObjectMapper();
 
     public static void start() {
         logger.info("Application has started");
+        mapper.setDateFormat(dateFormat);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -72,7 +74,7 @@ public class Races {
         }
     }
 
-    private static void addEntity() throws IOException {
+    private static void addEntity() throws IOException, ParseException {
         logger.info("Start add entity");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter type of entity: ");
@@ -82,7 +84,7 @@ public class Races {
         System.out.println("3. Jockey");
         System.out.println("4. Hippodrome");
         System.out.println("5. Race Results");
-        System.out.println("6. Race");
+        System.out.println("6. Competition");
         System.out.println("7. Back");
         System.out.println("______________________________________");
         int choice = Integer.parseInt(reader.readLine());
@@ -122,17 +124,16 @@ public class Races {
                 break;
             case 5:
                 ResultRaceVO resultRaceVO = (ResultRaceVO) getVO(choice);
-                if (resultRaceVO != null && checkObjectExists(3, resultRaceVO.getJockeyId()) && checkObjectExists(2, resultRaceVO.getHorseId())) {
+                if (resultRaceVO != null && checkObjectExists(3, resultRaceVO.getJockeyId()) && checkObjectExists(2, resultRaceVO.getHorseId()) && checkObjectExists(6, resultRaceVO.getCompetitionId())) {
                     setVO(getRepository(choice), resultRaceVO, resultRaceId);
                 } else {
                     logger.error("Error adding");
                 }
                 break;
             case 6:
-                RacesVO racesVO = (RacesVO) getVO(choice);
-                if (racesVO != null && checkObjectExists(4, racesVO.getHippodromeId())) {
-                    //Long[] myObjects = mapper.readValue(, Long[].class);
-                    setVO(getRepository(choice), racesVO, raceId);
+                CompetitionVO competitionVO = (CompetitionVO) getVO(choice);
+                if (competitionVO != null && checkObjectExists(4, competitionVO.getHippodromeId())) {
+                    setVO(getRepository(choice), competitionVO, competitionId);
                 } else {
                     logger.error("Error adding");
                 }
@@ -211,7 +212,7 @@ public class Races {
         System.out.println("3. Jockey");
         System.out.println("4. Hippodrome");
         System.out.println("5. Race Results");
-        System.out.println("6. Race");
+        System.out.println("6. Competition");
         System.out.println("7. Back");
         System.out.println("______________________________________");
         int choice = Integer.parseInt(reader.readLine());
@@ -265,10 +266,10 @@ public class Races {
                 }
                 break;
             case 6:
-                RacesRepository racesRepository = (RacesRepository) getRepository(choice);
-                if (!racesRepository.contain(id)) {
+                CompetitionRepository competitionRepository = (CompetitionRepository) getRepository(choice);
+                if (!competitionRepository.contain(id)) {
                     flag = false;
-                    logger.error("Object with race data wasn't found");
+                    logger.error("Object with competition data wasn't found");
                 }
                 break;
             default:
@@ -297,7 +298,7 @@ public class Races {
             case 5:
                 return mapper.readValue(new FileInputStream(filePath), ResultRaceVO.class);
             case 6:
-                return mapper.readValue(new FileInputStream(filePath), RacesVO.class);
+                return mapper.readValue(new FileInputStream(filePath), CompetitionVO.class);
 
         }
 
@@ -341,7 +342,7 @@ public class Races {
                 repository = DataService.getInstance().getResultRaceRepository();
                 break;
             case 6:
-                repository = DataService.getInstance().getRacesRepository();
+                repository = DataService.getInstance().getCompetitionRepository();
                 break;
             case 7:
                 repository = null;
@@ -375,7 +376,7 @@ public class Races {
                 loader = DataService.getInstance().getResultRaceLoader();
                 break;
             case 6:
-                loader = DataService.getInstance().getRacesLoader();
+                loader = DataService.getInstance().getCompetitionLoader();
                 break;
             case 7:
                 loader = null;

@@ -3,6 +3,8 @@ package edu.core.java.races.domain;
 /**
  * Created by Ubeto on 20.05.17.
  */
+
+//age
 public class Jockey extends DomainObject {
 
     private String fullName;

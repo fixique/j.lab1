@@ -1,3 +1,8 @@
 Manifest-Version: 1.0
-Main-Class: edu.core.java.races.Main
-Class-Path: logback-classic-1.2.1.jar logback-core-1.2.1.jar lf4j-api-1.7.25.jar jackson-core-lgpl-1.9.13.jar jackson-mapper-lgpl-1.9.13.jar 
+Class-Path: Libs/logback-classic-1.2.1.jar Labs/j.lab1/Libs/logback-co
+ re-1.2.1.jar Labs/j.lab1/Libs/slf4j-api-1.7.25.jar Labs/j.lab1/Libs/j
+ ackson-core-lgpl-1.9.13.jar Labs/j.lab1/Libs/jackson-mapper-lgpl-1.9.
+ 13.jar
+Created-By: 1.8.0_101 (Oracle Corporation)
+Main-Class: edu.core.java.competition.Main
+

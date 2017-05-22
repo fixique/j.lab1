@@ -18,15 +18,18 @@ public class ResultRaceLoader extends Loader {
     private ResultRaceTranslator translator = null;
     private JockeyLoader jockeyLoader = null;
     private HorseLoader horseLoader = null;
+    private CompetitionLoader competitionLoader = null;
 
     public ResultRaceLoader(ResultRaceRepository resultRaceRepository,
                             ResultRaceTranslator resultRaceTranslator,
                             JockeyLoader jockeyLoader,
-                            HorseLoader horseLoader) {
+                            HorseLoader horseLoader,
+                            CompetitionLoader competitionLoader) {
         this.repository = resultRaceRepository;
         this.translator = resultRaceTranslator;
         this.jockeyLoader = jockeyLoader;
         this.horseLoader = horseLoader;
+        this.competitionLoader = competitionLoader;
     }
 
     public ResultRace getEntityById(Long id) {
@@ -37,6 +40,7 @@ public class ResultRaceLoader extends Loader {
             resultRace = translator.fromValueToDomain(resultRaceVO);
             resultRace.setJockey(jockeyLoader.getEntityById(resultRaceVO.getJockeyId()));
             resultRace.setHorse(horseLoader.getEntityById(resultRaceVO.getHorseId()));
+            resultRace.setCompetition(competitionLoader.getEntityById(resultRaceVO.getCompetitionId()));
             logger.info("Domain object was successfully loaded");
         } else {
             logger.error("Domain object wasn't loaded");

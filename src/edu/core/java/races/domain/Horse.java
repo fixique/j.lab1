@@ -5,6 +5,8 @@ import edu.core.java.races.additional.Gender;
 /**
  * Created by Ubeto on 20.05.17.
  */
+
+//todo age to birth
 public class Horse extends DomainObject {
 
     private String nickname;
